@@ -1,0 +1,61 @@
+{
+  "name": "@storyblok/nuxt-ws",
+  "private": true,
+  "version": "0.0.1",
+  "workspaces": [
+    "./lib",
+    "./playground"
+  ],
+  "scripts": {
+    "demo": "npm run demo --workspace=playground",
+    "build": "npm run build --workspace=lib",
+    "test:e2e": "npm run build && npm run test:e2e --workspace=lib",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
+    "@nuxtjs/eslint-config-typescript": "latest",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.4.1"
+  },
+  "lint-staged": {
+    "*.{vue,js,css}": [
+      "prettier --write",
+      "eslint"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "@nuxtjs/eslint-config-typescript",
+      "plugin:vue/vue3-recommended",
+      "prettier"
+    ],
+    "rules": {
+      "vue/multi-word-component-names": 1
+    }
+  },
+  "eslintIgnore": [
+    "**/templates/plugin.js",
+    "playground/app.vue"
+  ],
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": false
+  }
+}

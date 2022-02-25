@@ -1,0 +1,65 @@
+{
+  "name": "@storyblok/nuxt",
+  "version": "3.0.0-beta.1",
+  "description": "Storyblok Nuxt.js module",
+  "main": "./dist/module.cjs",
+  "module": "./dist/module.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": "https://github.com/storyblok/storyblok-nuxt",
+  "scripts": {
+    "build": "vite build",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "jest __tests__",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "playground:run": "cd ../playground && npm run start",
+    "pretest:e2e": "cd ../playground && npm run build",
+    "test:e2e": "start-server-and-test playground:run http://localhost:3000 cy:run",
+    "test:e2e-watch": "start-server-and-test playground:run http://localhost:3000 cy:open",
+    "prepublishOnly": "npm run build && cp ../README.md ./",
+    "prepack": "nuxt-module-build",
+    "prepare": "nuxt-module-build --stub"
+  },
+  "dependencies": {
+    "@storyblok/vue": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
+    "@nuxt/module-builder": "latest",
+    "babel-jest": "^26.6.3",
+    "cypress": "^8.3.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "jest": "^26.6.3",
+    "start-server-and-test": "^1.14.0",
+    "vite": "^2.7.6"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true
+    }
+  },
+  "release": {
+    "branches": [
+      "master",
+      {
+        "name": "next",
+        "channel": "next",
+        "prerelease": "beta"
+      }
+    ]
+  },
+  "contributors": [
+    {
+      "name": "Alexander Feiglstorfer <delooks@gmail.com>"
+    }
+  ]
+}
