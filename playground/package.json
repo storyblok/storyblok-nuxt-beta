@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "demo": "nuxi dev",
+    "build": "nuxi build",
+    "start": "node .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "@storyblok/nuxt": "^3.0.0-beta.1",
+    "nuxt3": "latest"
+  }
+}
