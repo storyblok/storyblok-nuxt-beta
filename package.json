@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "demo": "npm run demo --workspace=playground",
-    "build": "npm run build --workspace=lib",
+    "build": "npm run prepack --workspace=lib",
     "test:e2e": "npm run build && npm run test:e2e --workspace=lib",
     "prepare": "husky install"
   },
@@ -53,7 +53,7 @@
     "playground/app.vue"
   ],
   "prettier": {
-    "trailingComma": "es5",
+    "trailingComma": "none",
     "tabWidth": 2,
     "semi": true,
     "singleQuote": false
