@@ -2,7 +2,9 @@ import { defineNuxtConfig } from "nuxt3";
 
 export default defineNuxtConfig({
   buildModules: [
-    ["@storyblok/nuxt", { accessToken: "wANpEQEsMYGOwLxwXQ76Ggtt" }],
+    ["@storyblok/nuxt-beta", { accessToken: "OurklwV5XsDJTIE1NJaD2wtt" }]
   ],
-  // vite: false
+  meta: {
+    script: [{ src: "https://cdn.tailwindcss.com" }]
+  }
 });
