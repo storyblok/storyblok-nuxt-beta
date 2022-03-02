@@ -24,8 +24,7 @@
     "playground:run": "cd ../playground && npm run start",
     "pretest:e2e": "cd ../playground && npm run build",
     "test:e2e": "start-server-and-test playground:run http://localhost:3000 cy:run",
-    "test:e2e-watch": "start-server-and-test playground:run http://localhost:3000 cy:open",
-    "prepare": "nuxt-module-build --stub"
+    "test:e2e-watch": "start-server-and-test playground:run http://localhost:3000 cy:open"
   },
   "dependencies": {
     "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
