@@ -1,6 +1,6 @@
 {
-  "name": "@storyblok/nuxt",
-  "version": "3.0.0-beta.1",
+  "name": "@storyblok/nuxt-beta",
+  "version": "1.0.0",
   "description": "Storyblok Nuxt.js module",
   "main": "./dist/module.cjs",
   "module": "./dist/module.mjs",
@@ -8,14 +8,14 @@
     ".": {
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
-    }
+    },
+    "./composables": "./dist/runtime/composables.js"
   },
   "files": [
     "dist"
   ],
   "repository": "https://github.com/storyblok/storyblok-nuxt",
   "scripts": {
-    "build": "vite build",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "jest __tests__",
     "cy:open": "cypress open",
@@ -29,7 +29,7 @@
     "prepare": "nuxt-module-build --stub"
   },
   "dependencies": {
-    "@storyblok/vue": "^4.0.0"
+    "@storyblok/vue": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
@@ -42,19 +42,9 @@
     "start-server-and-test": "^1.14.0",
     "vite": "^2.7.6"
   },
-  "eslintConfig": {
-    "env": {
-      "node": true
-    }
-  },
   "release": {
     "branches": [
-      "master",
-      {
-        "name": "next",
-        "channel": "next",
-        "prerelease": "beta"
-      }
+      "main"
     ]
   },
   "contributors": [
