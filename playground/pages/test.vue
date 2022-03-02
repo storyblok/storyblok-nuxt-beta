@@ -1,5 +1,5 @@
 <script setup>
-const story = useStoryblok("vue/test", { version: "draft" });
+const story = await useStoryblok("vue/test", { version: "draft" });
 </script>
 
 <template>
