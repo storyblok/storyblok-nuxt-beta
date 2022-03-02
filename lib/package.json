@@ -14,7 +14,7 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/storyblok/storyblok-nuxt",
+  "repository": "https://github.com/storyblok/storyblok-nuxt-beta",
   "scripts": {
     "test": "npm run test:unit && npm run test:e2e",
     "build": "npm run prepack",
