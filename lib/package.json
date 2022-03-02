@@ -51,5 +51,8 @@
     {
       "name": "Alexander Feiglstorfer <delooks@gmail.com>"
     }
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
