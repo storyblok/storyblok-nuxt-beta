@@ -2,17 +2,16 @@
   "name": "@storyblok/nuxt-beta",
   "version": "1.0.0",
   "description": "Storyblok Nuxt.js module",
-  "main": "./dist/module.cjs",
-  "module": "./dist/module.mjs",
+  "main": "./src/module.js",
+  "module": "./src/module.js",
   "exports": {
     ".": {
-      "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
-    },
-    "./composables": "./dist/runtime/composables.js"
+      "import": "./src/module.js",
+      "require": "./src/module.js"
+    }
   },
   "files": [
-    "dist"
+    "src"
   ],
   "repository": "https://github.com/storyblok/storyblok-nuxt-beta",
   "scripts": {
