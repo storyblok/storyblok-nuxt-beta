@@ -6,6 +6,11 @@
 	<p align="center">Nuxt 3 module for the <a href="http://www.storyblok.com?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt-beta" target="_blank">Storyblok</a>, Headless CMS.</p> <br />
 </div>
 
+<br>
+
+## ⚠️ This module is still WIP ⚠️
+
+<!--
 <p align="center">
   <a href="https://npmjs.com/package/@storyblok/nuxt-beta">
     <img src="https://img.shields.io/npm/v/@storyblok/nuxt-beta/latest.svg?style=flat-square" alt="Storyblok JS Client" />
@@ -177,4 +182,4 @@ Use this one-line function to cover the most common use case: updating the story
 ### Contributing
 
 Please see our [contributing guidelines](https://github.com/storyblok/.github/blob/master/contributing.md) and our [code of conduct](https://www.storyblok.com/trust-center#code-of-conduct?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt-beta).
-This project use [semantic-release](https://semantic-release.gitbook.io/semantic-release/) for generate new versions by using commit messages and we use the Angular Convention to naming the commits. Check [this question](https://semantic-release.gitbook.io/semantic-release/support/faq#how-can-i-change-the-type-of-commits-that-trigger-a-release) about it in semantic-release FAQ.
+This project use [semantic-release](https://semantic-release.gitbook.io/semantic-release/) for generate new versions by using commit messages and we use the Angular Convention to naming the commits. Check [this question](https://semantic-release.gitbook.io/semantic-release/support/faq#how-can-i-change-the-type-of-commits-that-trigger-a-release) about it in semantic-release FAQ. -->
