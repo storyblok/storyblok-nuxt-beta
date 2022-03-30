@@ -10,6 +10,138 @@
 
 ## ⚠️ This module is still WIP ⚠️
 
+As of right now, this module _does not work_ in Nuxt 3. However, in the meantime you can easily integrate the [ official Storyblok Vue SDK `@storyblok/vue`](https://github.com/storyblok/storyblok-vue) as a workaround by following the instructions  hereinafter.
+
+### Live Demo
+
+If you are in a hurry, we have provided this [live demo of a Nuxt 3 app utilizing our Vue SDK](https://stackblitz.com/edit/sdk-nuxt3-vue3) for you on Stackblitz.
+
+### Installation
+
+Install `@storyblok/vue`:
+
+```bash
+npm install @storyblok/vue
+# yarn add @storyblok/vue
+```
+
+Add the following code to `nuxt.config.ts`.
+
+```js
+import { defineNuxtConfig } from "nuxt3";
+
+export default defineNuxtConfig({
+  components: {
+    global: true,
+    dirs: ['~/components/storyblok'],
+  },
+});
+```
+
+Create a file `plugins/storyblok.js` with the following content:
+
+```js
+import { StoryblokVue, apiPlugin } from '@storyblok/vue';
+import { defineNuxtPlugin } from '#app';
+
+export default defineNuxtPlugin(({ vueApp }) => {
+  vueApp.use(StoryblokVue, {
+    accessToken: YOUR_ACCESS_TOKEN,
+    use: [apiPlugin],
+  });
+});
+```
+
+### Fetching Content from Storyblok
+
+Create a file `pages/index.vue` with the following content:
+
+```js
+<script setup>
+import { useStoryblok } from '@storyblok/vue';
+const story = await useStoryblok('home', { version: 'draft' });
+</script>
+
+<template>
+  <StoryblokComponent v-if="story" :blok="story.content" />
+</template>
+```
+
+This will load all the content of your home story defined in your Storyblok space. Moreover, the Storyblok Bridge to enable real-time editing is automatically enabled. You can find additional information about this as well as optional parameters in the [`@storyblok/vue` readme](https://github.com/storyblok/storyblok-vue).
+
+### Adding Storyblok Components
+
+For the `<StoryblokComponent />` to work and do its magic, simply add all of your components to `components/storyblok`. When creating a new Storyblok space, a Feature, Teaser, Grid and Page component are created for you, so let's add these to `components/storyblok`.
+
+*Feature.vue*
+```js
+<template>
+  <div v-editable="blok" class="py-2" data-test="feature">
+    <h1 class="text-lg">{{ blok.name }}</h1>
+  </div>
+</template>
+
+<script setup>
+defineProps({ blok: Object });
+</script>
+```
+
+*Teaser.vue*
+```js
+<template>
+  <div
+    v-editable="blok"
+    :cat="$attrs.cat"
+    class="py-8 mb-6 text-5xl font-bold text-center"
+    data-test="teaser"
+  >
+    {{ blok.headline }}
+  </div>
+</template>
+
+<script setup>
+defineProps({ blok: Object });
+</script>
+```
+
+*Grid.vue*
+```js
+<template>
+  <div v-editable="blok" class="flex py-8 mb-6" data-test="grid">
+    <div v-for="blok in blok.columns" :key="blok._uid" class="flex-auto px-6">
+      <StoryblokComponent :blok="blok" />
+    </div>
+  </div>
+</template>
+
+<script setup>
+defineProps({ blok: Object });
+</script>
+```
+
+*Page.vue*
+```js
+<template>
+  <div v-editable="blok" class="px-6" data-test="page">
+    <StoryblokComponent
+      v-for="blok in blok.body"
+      :key="blok._uid"
+      :blok="blok"
+    />
+  </div>
+</template>
+
+<script setup>
+defineProps({ blok: Object });
+</script>
+```
+
+### Final Steps
+
+Now, all you have to do is delete `app.vue` to allow your recently created `pages/index.vue` to load.
+
+If you run `npm run dev` now, you should see your Storyblok content when visiting `http://localhost:3000/` in your browser.
+
 <!--
 <p align="center">
   <a href="https://npmjs.com/package/@storyblok/nuxt-beta">
