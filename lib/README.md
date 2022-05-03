@@ -47,7 +47,7 @@ npm install @storyblok/nuxt-beta
 Add following code to buildModules section of `nuxt.config.js` and replace the accessToken with API token from Storyblok space.
 
 ```js
-import { defineNuxtConfig } from "nuxt3";
+import { defineNuxtConfig } from "nuxt";
 
 export default defineNuxtConfig({
   buildModules: [
@@ -60,7 +60,7 @@ export default defineNuxtConfig({
 You can also use the `storyblok` config if you prefer:
 
 ```js
-import { defineNuxtConfig } from "nuxt3";
+import { defineNuxtConfig } from "nuxt";
 
 export default defineNuxtConfig({
   buildModules: ["@storyblok/nuxt-beta"],

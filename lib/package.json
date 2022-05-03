@@ -1,18 +1,17 @@
 {
   "name": "@storyblok/nuxt-beta",
-  "version": "1.0.0",
+  "version": "2.1.2",
   "description": "Storyblok Nuxt.js module",
-  "main": "./dist/module.cjs",
-  "module": "./dist/module.mjs",
+  "main": "./src/module.js",
+  "module": "./src/module.js",
   "exports": {
     ".": {
-      "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
-    },
-    "./composables": "./dist/runtime/composables.js"
+      "import": "./src/module.js",
+      "require": "./src/module.js"
+    }
   },
   "files": [
-    "dist"
+    "src"
   ],
   "repository": "https://github.com/storyblok/storyblok-nuxt-beta",
   "scripts": {
@@ -27,8 +26,8 @@
     "test:e2e-watch": "start-server-and-test playground:run http://localhost:3000 cy:open"
   },
   "dependencies": {
-    "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
-    "@storyblok/vue": "^6.0.0"
+    "@nuxt/kit": "^3.0.0-rc.2",
+    "@storyblok/vue": "^6.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
