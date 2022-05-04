@@ -6,143 +6,6 @@
 	<p align="center">Nuxt 3 module for the <a href="http://www.storyblok.com?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt-beta" target="_blank">Storyblok</a>, Headless CMS.</p> <br />
 </div>
 
-<br>
-
-## ⚠️ This module is still WIP ⚠️
-
-As of right now, this module _does not work_ in Nuxt 3. However, in the meantime you can easily integrate the [ official Storyblok Vue SDK `@storyblok/vue`](https://github.com/storyblok/storyblok-vue) as a workaround by following the instructions  hereinafter.
-
-### Live Demo
-
-If you are in a hurry, we have provided this [live demo of a Nuxt 3 app utilizing our Vue SDK](https://stackblitz.com/edit/sdk-nuxt3-vue3) for you on Stackblitz.
-
-### Installation
-
-Install `@storyblok/vue`:
-
-```bash
-npm install @storyblok/vue
-# yarn add @storyblok/vue
-```
-
-Add the following code to `nuxt.config.ts`.
-
-```js
-import { defineNuxtConfig } from "nuxt3";
-
-export default defineNuxtConfig({
-  components: {
-    global: true,
-    dirs: ['~/components/storyblok'],
-  },
-});
-```
-
-Create a file `plugins/storyblok.js` with the following content:
-
-```js
-import { StoryblokVue, apiPlugin } from '@storyblok/vue';
-import { defineNuxtPlugin } from '#app';
-
-export default defineNuxtPlugin(({ vueApp }) => {
-  vueApp.use(StoryblokVue, {
-    accessToken: YOUR_ACCESS_TOKEN,
-    use: [apiPlugin],
-  });
-});
-```
-
-### Fetching Content from Storyblok
-
-Create a file `pages/index.vue` with the following content:
-
-```js
-<script setup>
-import { useStoryblok } from '@storyblok/vue';
-const story = await useStoryblok('home', { version: 'draft' });
-</script>
-
-<template>
-  <StoryblokComponent v-if="story" :blok="story.content" />
-</template>
-```
-
-This will load all the content of your home story defined in your Storyblok space. Moreover, the Storyblok Bridge to enable real-time editing is automatically enabled. You can find additional information about this as well as optional parameters in the [`@storyblok/vue` readme](https://github.com/storyblok/storyblok-vue).
-
-### Adding Storyblok Components
-
-For the `<StoryblokComponent />` to work and do its magic, simply add all of your components to `components/storyblok`. When creating a new Storyblok space, a Feature, Teaser, Grid and Page component are created for you, so let's add these to `components/storyblok`.
-
-*Feature.vue*
-```js
-<template>
-  <div v-editable="blok" class="py-2" data-test="feature">
-    <h1 class="text-lg">{{ blok.name }}</h1>
-  </div>
-</template>
-
-<script setup>
-defineProps({ blok: Object });
-</script>
-```
-
-*Teaser.vue*
-```js
-<template>
-  <div
-    v-editable="blok"
-    :cat="$attrs.cat"
-    class="py-8 mb-6 text-5xl font-bold text-center"
-    data-test="teaser"
-  >
-    {{ blok.headline }}
-  </div>
-</template>
-
-<script setup>
-defineProps({ blok: Object });
-</script>
-```
-
-*Grid.vue*
-```js
-<template>
-  <div v-editable="blok" class="flex py-8 mb-6" data-test="grid">
-    <div v-for="blok in blok.columns" :key="blok._uid" class="flex-auto px-6">
-      <StoryblokComponent :blok="blok" />
-    </div>
-  </div>
-</template>
-
-<script setup>
-defineProps({ blok: Object });
-</script>
-```
-
-*Page.vue*
-```js
-<template>
-  <div v-editable="blok" class="px-6" data-test="page">
-    <StoryblokComponent
-      v-for="blok in blok.body"
-      :key="blok._uid"
-      :blok="blok"
-    />
-  </div>
-</template>
-
-<script setup>
-defineProps({ blok: Object });
-</script>
-```
-
-### Final Steps
-
-Now, all you have to do is delete `app.vue` to allow your recently created `pages/index.vue` to load.
-
-If you run `npm run dev` now, you should see your Storyblok content when visiting `http://localhost:3000/` in your browser.
-
-<!--
 <p align="center">
   <a href="https://npmjs.com/package/@storyblok/nuxt-beta">
     <img src="https://img.shields.io/npm/v/@storyblok/nuxt-beta/latest.svg?style=flat-square" alt="Storyblok JS Client" />
@@ -150,7 +13,7 @@ If you run `npm run dev` now, you should see your Storyblok content when visitin
   <a href="https://npmjs.com/package/@storyblok/nuxt-beta" rel="nofollow">
     <img src="https://img.shields.io/npm/dt/@storyblok/nuxt-beta.svg?style=flat-square" alt="npm">
   </a>
-</p>
+  </p>
 
 <p align="center">
   <a href="https://discord.gg/jKrbAMz">
@@ -159,20 +22,20 @@ If you run `npm run dev` now, you should see your Storyblok content when visitin
   <a href="https://twitter.com/intent/follow?screen_name=storyblok">
     <img src="https://img.shields.io/badge/Follow-%40storyblok-09b3af?style=appveyor&logo=twitter" alt="Follow @Storyblok" />
   </a><br/>
-  <a href="https://app.storyblok.com/#!/signup?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt-beta">
+  <a href="https://app.storyblok.com/#!/signup?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt">
     <img src="https://img.shields.io/badge/Try%20Storyblok-Free-09b3af?style=appveyor&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAHqADAAQAAAABAAAAHgAAAADpiRU/AAACRElEQVRIDWNgGGmAEd3D3Js3LPrP8D8WXZwSPiMjw6qvPoHhyGYwIXNAbGpbCjbzP0MYuj0YFqMroBV/wCxmIeSju64eDNzMBJUxvP/9i2Hnq5cM1devMnz984eQsQwETeRhYWHgIcJiXqC6VHlFBjUeXgav40cIWkz1oLYXFmGwFBImaDFBHyObcOzdW4aSq5eRhRiE2dgYlpuYoYSKJi8vw3GgWnyAJIs/AuPu4scPGObd/fqVQZ+PHy7+6udPOBsXgySLDfn5GRYYmaKYJcXBgWLpsx8/GPa8foWiBhuHJIsl2DkYQqWksZkDFgP5PObcKYYff//iVAOTIDlx/QPqRMb/YSYBaWlOToZIaVkGZmAZSQiQ5OPtwHwacuo4iplMQEu6tXUZMhSUGDiYmBjylFQYvv/7x9B04xqKOnQOyT5GN+Df//8M59ASXKyMHLoyDD5JPtbj42OYrm+EYgg70JfuYuIoYmLs7AwMjIzA+uY/zjAnyWJpDk6GOFnCvrn86SOwmsNtKciVFAc1ileBHFDC67lzG10Yg0+SjzF0ownsf/OaofvOLYaDQJoQIGix94ljv1gIZI8Pv38zPvj2lQWYf3HGKbpDCFp85v07NnRN1OBTPY6JdRSGxcCw2k6sZuLVMZ5AV4s1TozPnGGFKbz+/PE7IJsHmC//MDMyhXBw8e6FyRFLv3Z0/IKuFqvFyIqAzd1PwBzJw8jAGPfVx38JshwlbIygxmYY43/GQmpais0ODDHuzevLMARHBcgIAQAbOJHZW0/EyQAAAABJRU5ErkJggg==" alt="Follow @Storyblok" />
   </a>
 </p>
 
-> Try out the **[LIVE DEMO](https://stackblitz.com/edit/nuxt-3-sdk-demo?file=pages%2Findex.vue&terminal=dev)** on Stackblitz and play with code yourself!
+> Try out the **[LIVE DEMO](https://stackblitz.com/edit/nuxt-3-sdk-demo)** on Stackblitz and play with the code yourself!
 
 ## 🚀 Usage
 
-> If you are first-time user of the Storyblok, read the [Getting Started](https://www.storyblok.com/docs/guide/getting-started?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt-beta) guide to get a project ready in less than 5 minutes.
+_Note: This module is for Nuxt 3. [Check out `@storyblok/nuxt` for Nuxt 2](https://github.com/storyblok/storyblok-nuxt)_.
+
+> If you are first-time user of Storyblok, read the [Getting Started](https://www.storyblok.com/docs/guide/getting-started?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt) guide to get a project ready in less than 5 minutes.
 
 ### Installation
-
-_Note: This module is for Nuxt 3. [Check out `@storyblok/nuxt` for Nuxt 2](https://github.com/storyblok/storyblok-nuxt)_.
 
 Install `@storyblok/nuxt-beta`:
 
@@ -181,30 +44,12 @@ npm install @storyblok/nuxt-beta
 # yarn add @storyblok/nuxt-beta
 ```
 
-Add following code to buildModules section of `nuxt.config.js` and replace the accessToken with API token from Storyblok space.
+Initialize the module by adding it to modules section of `nuxt.config.js` and replacing the accessToken with the API token from your Storyblok space:
 
 ```js
-import { defineNuxtConfig } from "nuxt";
-
-export default defineNuxtConfig({
-  buildModules: [
-    ["@storyblok/nuxt-beta", { accessToken: "<your-access-token>" }]
-    // ...
-  ]
-});
-```
-
-You can also use the `storyblok` config if you prefer:
-
-```js
-import { defineNuxtConfig } from "nuxt";
-
-export default defineNuxtConfig({
-  buildModules: ["@storyblok/nuxt-beta"],
-  storyblok: {
-    accessToken: "<your-access-token>"
-  }
-});
+modules: [
+  ['@storyblok/nuxt-beta', { accessToken: '<your-access-token>' }],
+]
 ```
 
 #### Options
@@ -213,47 +58,47 @@ When you initialize the module, you can pass all [_@storyblok/vue_ options](http
 
 ```js
 // Defaults
-["@storyblok/nuxt-beta", {
-  {
+modules: [
+  ['@storyblok/nuxt-beta', {
     accessToken: "<your-access-token>",
     bridge: true,
     apiOptions: {}, // storyblok-js-client options
     useApiClient: true
-  }
-}]
+  }]
+]
 ```
 
-### Getting started
+## Getting started
 
 ### 1. Creating and linking your components to Storyblok Visual Editor
 
-To link your Vue components to their equivalent you created in Storyblok:
+In order to link your Nuxt components to their equivalents that you created in Storyblok, you need to take the following steps:
 
-- First, you need to load them globally. You can just place them on the `~/components/storyblok` directory and will be discovered automagically, otherwise you can load them manually (for example, by [using a Nuxt plugin](https://stackoverflow.com/questions/43040692/global-components-in-vue-nuxt)).
+- First, create a `storyblok` folder at the root of your project
 
-- For each components, use the `v-editable` directive on its root element, passing the `blok` property that they receive:
+- In this folder, create the equivalents of your Storyblok components
+
+- For each component, use the `v-editable` directive on its root element, passing the `blok` property that they receive:
 
 ```html
 <div v-editable="blok" / >
 ```
 
-- Finally, use `<StoryblokComponent>` which available globally in the Nuxt app:
+- Finally, use `<StoryblokComponent>` which is available globally in the Nuxt app:
 
 ```html
-<StoryblokComponent blok="blok" />
+<StoryblokComponent :blok="blok" />
 ```
 
-> The `blok` is the actual blok data coming from [Storblok's Content Delivery API](https://www.storyblok.com/docs/api/content-delivery/v2?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt).
+> The `blok` is the actual blok data coming from [Storblok's Content Delivery API](https://www.storyblok.com/docs/api/content-delivery/v2?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt-beta).
 
-### 2. Getting Storyblok Stories and listen to Visual Editor events
+### 2. Getting Storyblok Stories and listening to Visual Editor events
 
-#### Composition API
-
-The simplest way is by using the `useStoryblok` one-liner composable (it's autoimported):
+The simplest way is by using the `useStoryblok` one-liner composable:
 
 ```html
 <script setup>
-  const story = await useStoryblok("vue", { version: "draft" });
+const story = await useStoryblok('vue', { version: 'draft' });
 </script>
 
 <template>
@@ -261,20 +106,21 @@ The simplest way is by using the `useStoryblok` one-liner composable (it's autoi
 </template>
 ```
 
-Which is the short-hand equivalent to using `useStoryblokApi` and `useStoryblokBridge` functions separately:
+Which is the short-hand equivalent to using the `useStoryblokApi` and `useStoryblokBridge` functions separately:
 
 ```html
 <script setup>
-  const story = ref(null);
+const story = ref(null);
+
+onMounted(async () => {
   const storyblokApi = useStoryblokApi();
-  const { data } = await storyblokApi.get("cdn/stories/vue", {
-    version: "draft"
+  const { data } = await storyblokApi.get('cdn/stories/vue/test', {
+    version: 'draft',
   });
   story.value = data.story;
 
-  onMounted(() => {
-    useStoryblokBridge(story.value.id, (evStory) => (story.value = evStory));
-  });
+  useStoryblokBridge(story.value.id, (evStory) => (story.value = evStory));
+});
 </script>
 
 <template>
@@ -282,11 +128,11 @@ Which is the short-hand equivalent to using `useStoryblokApi` and `useStoryblokB
 </template>
 ```
 
-### API
+## API
 
 #### useStoryblok(slug, apiOptions, bridgeOptions)
 
-Check the available [apiOptions](https://github.com/storyblok/storyblok-js-client#class-storyblok) (passed to `storyblok-js-client`) and [bridgeOptions](https://www.storyblok.com/docs/Guides/storyblok-latest-js?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt-beta) (passed to the Storyblok Bridge).
+Check the available [apiOptions](https://github.com/storyblok/storyblok-js-client#class-storyblok) (passed to `storyblok-js-client`) and [bridgeOptions](https://www.storyblok.com/docs/Guides/storyblok-latest-js?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt) (passed to the Storyblok Bridge).
 
 #### useStoryblokApi()
 
@@ -296,11 +142,15 @@ Returns the instance of the `storyblok-js-client`.
 
 Use this one-line function to cover the most common use case: updating the story when any kind of change happens on Storyblok Visual Editor.
 
+#### $storyapi
+
+Equivalent to the client that `useStoryblokApi` returns, but accessible in the Nuxt context and components instance.
+
 ## 🔗 Related Links
 
-- **[Live Demo on Stackblitz](https://stackblitz.com/edit/nuxt-3-sdk-demo?file=pages%2Findex.vue&terminal=dev)**
-- **[Nuxt.js Hub](https://www.storyblok.com/tc/nuxtjs?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt-beta)**: Learn how to develop your own Nuxt.js applications that use Storyblok APIs to retrieve and manage content;
-- **[Storyblok & Nuxt.js on GitHub](https://github.com/search?q=org%3Astoryblok+topic%3Anuxt)**: Check all of our Nuxt.js open source repos;
+- **[Live Demo on Stackblitz](https://stackblitz.com/edit/nuxt-3-sdk-demo)**
+- **[Nuxt.js Hub](https://www.storyblok.com/tc/nuxtjs?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt-beta)**: Learn how to develop your own Nuxt.js applications that use Storyblok APIs to retrieve and manage content.
+- **[Storyblok & Nuxt.js on GitHub](https://github.com/search?q=org%3Astoryblok+topic%3Anuxt)**: Check all of our Nuxt.js open source repos.
 - **[Storyblok CLI](https://github.com/storyblok/storyblok)**: A simple CLI for scaffolding Storyblok projects and fieldtypes.
 
 ## ℹ️ More Resources
@@ -308,10 +158,9 @@ Use this one-line function to cover the most common use case: updating the story
 ### Support
 
 - Bugs or Feature Requests? [Submit an issue](/../../issues/new);
-
 - Do you have questions about Storyblok or you need help? [Join our Discord Community](https://discord.gg/jKrbAMz).
 
 ### Contributing
 
-Please see our [contributing guidelines](https://github.com/storyblok/.github/blob/master/contributing.md) and our [code of conduct](https://www.storyblok.com/trust-center#code-of-conduct?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt-beta).
-This project use [semantic-release](https://semantic-release.gitbook.io/semantic-release/) for generate new versions by using commit messages and we use the Angular Convention to naming the commits. Check [this question](https://semantic-release.gitbook.io/semantic-release/support/faq#how-can-i-change-the-type-of-commits-that-trigger-a-release) about it in semantic-release FAQ. -->
+Please see our [contributing guidelines](https://github.com/storyblok/.github/blob/master/contributing.md) and our [code of conduct](https://www.storyblok.com/trust-center#code-of-conduct?utm_source=github.com&utm_medium=readme&utm_campaign=storyblok-nuxt).
+This project use [semantic-release](https://semantic-release.gitbook.io/semantic-release/) for generate new versions by using commit messages and we use the Angular Convention to naming the commits. Check [this question](https://semantic-release.gitbook.io/semantic-release/support/faq#how-can-i-change-the-type-of-commits-that-trigger-a-release) about it in semantic-release FAQ.
